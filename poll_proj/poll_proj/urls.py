@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from django.conf.urls import re_path
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+
+from main.views import GenerateRandomUserView, UsersListView
 
 urlpatterns = [
   path('', include('pages.urls')),
   path('poll_app/', include('poll_app.urls')),
   path('', include('main.urls')),
   path('admin/', admin.site.urls),
+  re_path('users/', UsersListView.as_view(), name='users_list'),
+  re_path('generate/', GenerateRandomUserView.as_view(), name='generate')
+
 ]
